@@ -1,0 +1,47 @@
+HOW TO USE
+----------
+
+// Locally stored data
+var LocalObject = Backbone.Model.extend({,
+    defaults : {
+        ...    
+    },
+
+    localStorage : new Store("myLocalStore")
+});
+
+
+// Remotely stored data
+var RemoteObject = Backbone.Model.extend({,
+    defaults : {
+        ...    
+    },
+
+    url : "my/remote/storage/"
+});
+
+
+// It is also possible to have objects that are stored both, locally 
+// and remote. In that case, you just have to specify where to save 
+// or fetch data to/from.
+var HybridObject = Backbone.Model.extend({
+    defaults : {
+        ...    
+    },
+
+    localStorage : new Store("myLocalStore"),
+
+    url : "my/remote/storage/",
+
+    fetch : function (opts) {
+        opts.location = "local"; // default is remote
+        Backbone.Model.prototype.fetch.apply(this, arguments);
+    },
+
+    save : function (attrs, opts) {
+        opts.location = "local"; // default is remote
+        Backbone.Model.prototype.save.apply(this, arguments);
+    }
+});
+
+// It also works for collections.
