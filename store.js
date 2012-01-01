@@ -277,7 +277,7 @@ Backbone.sync = function (method, model, options) {
  * @param {Object} headers The headers to set.
  */
 Backbone.sync.setGlobalHeaders = function (headers) {
-    $.ajaxSettings(headers);
+    $.ajaxSetup(headers);
 };
 
 
